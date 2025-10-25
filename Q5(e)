@@ -1,0 +1,52 @@
+
+
+#include <iostream>
+using namespace std;
+
+class SymmetricMatrix {
+    int *A, n;
+public:
+    SymmetricMatrix(int n) {
+        this->n = n;
+        A = new int[n * (n + 1) / 2];
+    }
+
+    void set(int i, int j, int val) {
+        if (i >= j)
+            A[i * (i - 1) / 2 + (j - 1)] = val;
+    }
+
+    int get(int i, int j) {
+        if (i >= j)
+            return A[i * (i - 1) / 2 + (j - 1)];
+        else
+            return get(j, i);
+    }
+
+    void display() {
+        cout << "\nSymmetric Matrix:\n";
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n; j++)
+                cout << get(i, j) << " ";
+            cout << endl;
+        }
+    }
+};
+
+int main() {
+    int n;
+    cout << "Enter size of Symmetric matrix: ";
+    cin >> n;
+
+    SymmetricMatrix s(n);
+    cout << "Enter lower triangle elements only:\n";
+    for (int i = 1; i <= n; i++)
+        for (int j = 1; j <= i; j++) {
+            int x;
+            cin >> x;
+            s.set(i, j, x);
+        }
+
+    s.display();
+    return 0;
+}
