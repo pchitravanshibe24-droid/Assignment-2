@@ -1,0 +1,13 @@
+#include <iostream>
+#include <cctype>
+using namespace std;
+
+int main() {
+    string str;
+    cout << "Enter uppercase string: ";
+    cin >> str;
+    for (char &ch : str)
+        ch = tolower(ch);
+    cout << "Lowercase: " << str;
+    return 0;
+}
