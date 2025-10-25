@@ -1,0 +1,52 @@
+
+
+#include <iostream>
+using namespace std;
+
+class UpperTriangular {
+    int *A, n;
+public:
+    UpperTriangular(int n) {
+        this->n = n;
+        A = new int[n * (n + 1) / 2];
+    }
+
+    void set(int i, int j, int val) {
+        if (i <= j)
+            A[i * n - (i * (i - 1)) / 2 + (j - i)] = val;
+    }
+
+    int get(int i, int j) {
+        if (i <= j)
+            return A[i * n - (i * (i - 1)) / 2 + (j - i)];
+        else
+            return 0;
+    }
+
+    void display() {
+        cout << "\nUpper Triangular Matrix:\n";
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n; j++)
+                cout << get(i, j) << " ";
+            cout << endl;
+        }
+    }
+};
+
+int main() {
+    int n;
+    cout << "Enter size of matrix: ";
+    cin >> n;
+
+    UpperTriangular u(n);
+    cout << "Enter elements row-wise:\n";
+    for (int i = 1; i <= n; i++)
+        for (int j = 1; j <= n; j++) {
+            int x;
+            cin >> x;
+            u.set(i, j, x);
+        }
+
+    u.display();
+    return 0;
+}
